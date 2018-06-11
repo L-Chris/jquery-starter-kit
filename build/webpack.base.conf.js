@@ -11,7 +11,7 @@ function resolve (dir) {
 }
 
 module.exports = {
-  entry: utils.findEntry(`${config.base.viewsSubDirectory}/**/*.js`),
+  entry: utils.findEntry(`${config.base.viewsSubDirectory}/**/index.js`),
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -24,6 +24,8 @@ module.exports = {
       jquery: 'jquery/jquery.min.js',
       assets: resolve('src/assets'),
       components: resolve('src/components'),
+      views: resolve('src/views'),
+      src: resolve('src'),
       '@': resolve('src')
     }
   },
@@ -53,11 +55,17 @@ module.exports = {
         limit: 10000,
         name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
       }
+    }, {
+      test: /\.hbs$/,
+      loader: 'handlebars-loader'
     }],
     postLoaders: [{
       test: /\.js$/,
       loader: "es3ify-loader"
     }]
   },
-  sassResources: ['./src/styles/vars.scss', './src/styles/mixins.scss']
+  sassResources: ['./src/styles/vars.scss', './src/styles/mixins.scss'],
+  externals: {
+    '$': 'window.jQuery'
+  }
 }

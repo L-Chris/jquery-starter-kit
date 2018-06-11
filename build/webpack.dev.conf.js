@@ -48,16 +48,17 @@ const webpackConfig = merge(baseWebpackConfig, {
   ]
 })
 
-const pages = utils.findEntry(`${config.base.viewsSubDirectory}/**/*.html`)
+const entries = utils.findEntry(`${config.base.viewsSubDirectory}/**/index.js`)
+const pages = utils.findEntry(`${config.base.viewsSubDirectory}/**/index.hbs`)
 
-for (let pathName in pages) {
+for (let pathName in entries) {
   const conf = {
+    title: 'jquery-starter-kit',
     filename: `${pathName}.html`,
-    template: pages[pathName],
-    chunks: [pathName, 'vendors', 'manifest'],
-    inject: true
+    template: pages[pathName] || resolve('src/index.hbs'),
+    meta: {},
+    chunks: [pathName]
   }
-
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf))  
 }
 

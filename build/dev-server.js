@@ -51,9 +51,9 @@ Object.keys(proxyTable).forEach(function (context) {
 app.use(require('connect-history-api-fallback')({
   index: '/home/index.html',
   rewrites: [
-    { from: /\/competion/, to: '/competion/index.html'},
-    { from: /\/login/, to: '/login/index.html'},
-    { from: /\/register/, to: '/register/index.html'}
+    { from: /\/competition$/, to: '/competition/index.html'},
+    { from: /\/login$/, to: '/login/index.html'},
+    { from: /\/register$/, to: '/register/index.html'}
   ]
 }))
 

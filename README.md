@@ -1,4 +1,4 @@
-# anu-starter-kit
+# jquery-starter-kit
 
 ## features
 - antd

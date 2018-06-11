@@ -90,13 +90,15 @@ const webpackConfig = merge(baseWebpackConfig, {
   ]
 })
 
-const pages = utils.findEntry(`${config.base.viewsSubDirectory}/**/*.html`)
+const entries = utils.findEntry(`${config.base.viewsSubDirectory}/**/index.js`)
+const pages = utils.findEntry(`${config.base.viewsSubDirectory}/**/index.hbs`)
 
-for (let pathName in pages) {
+for (let pathName in entries) {
   const conf = {
     filename: `${pathName}.html`,
-    template: pages[pathName],
-    chunks: [pathName, 'vendors', 'manifest'],
+    template: pages[pathName] || resolve('src/index.hbs'),
+    meta: {},
+    chunks: [pathName, 'vendor'],
     inject: true,
     minify: {
       removeComments: true,

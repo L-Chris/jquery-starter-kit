@@ -55,8 +55,8 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: '',
-    assetsPublicPath: './',
-    assetsCDNRoot: 'http://oh1f9ia5p.bkt.clouddn.com/parent-app/',
+    assetsPublicPath: '../',
+    assetsCDNRoot: '',
     routePublicPath: '',
 
     /**
