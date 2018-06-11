@@ -11,6 +11,7 @@ const path = require('path')
 const express = require('express')
 const webpack = require('webpack')
 const proxyMiddleware = require('http-proxy-middleware')
+const utils = require('./utils')
 const webpackConfig = require('./webpack.dev.conf')
 
 const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
@@ -48,13 +49,20 @@ Object.keys(proxyTable).forEach(function (context) {
   app.use(proxyMiddleware(options.filter || context, options))
 })
 
+const pages = utils.findEntry(`${config.base.viewsSubDirectory}/*/index.hbs`)
+const rewrites = Object.entries(pages).reduce((pre, [name]) => {
+  if (!name.includes('home/index')) {
+    pre.push({
+      from: new RegExp(`\/${name.replace(/\/index$/, '')}$`),
+      to: `/${name}.html`
+    })
+  }
+  return pre
+}, [])
+
 app.use(require('connect-history-api-fallback')({
   index: '/home/index.html',
-  rewrites: [
-    { from: /\/competition$/, to: '/competition/index.html'},
-    { from: /\/login$/, to: '/login/index.html'},
-    { from: /\/register$/, to: '/register/index.html'}
-  ]
+  rewrites
 }))
 
 app.use(devMiddleware)

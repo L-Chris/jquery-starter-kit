@@ -66,6 +66,7 @@ module.exports = {
   },
   sassResources: ['./src/styles/vars.scss', './src/styles/mixins.scss'],
   externals: {
-    '$': 'window.jQuery'
+    $: 'window.jQuery',
+    handlebars: 'window.Handlebars'
   }
 }
