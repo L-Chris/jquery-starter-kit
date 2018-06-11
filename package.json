@@ -17,7 +17,6 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "1.6.1",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
     "chalk": "^2.4.1",
     "connect-history-api-fallback": "^1.5.0",
     "css-loader": "^0.28.4",
@@ -53,8 +52,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "console-polyfill": "^0.3.0",
-    "dayjs": "^1.6.5",
-    "jquery": "1.9.1"
+    "dayjs": "^1.6.5"
   },
   "engines": {
     "node": ">= 4.0.0",
