@@ -28,6 +28,9 @@ li {
 #app {
     height: 100%;
 }
+.container {
+    height: 100%;
+}
 
 .view {
     width: 100%;
@@ -40,6 +43,18 @@ li {
         height: 100%;
     }
     &-foot {
+    }
+}
+.sc {
+    &-header {
+        background-color: white;
+        border-bottom: 1px solid #cccccc;
+    }
+    &-footer {
+        padding: 30px 0;
+        text-align: center;
+        background-color: #666666;
+        color: #999999;
     }
 }
 

@@ -4,7 +4,34 @@
     {{> $src/head}}
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <section class="competition view">
+        {{> $components/ScHeader/index}}
+        <main class="competition-main container">
+          <div id="list-wrapper" class="competition-main-list"></div>
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+              <li>
+                <a href="#" aria-label="Previous">
+                  <span aria-hidden="true">上一页</span>
+                </a>
+              </li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">...</a></li>
+              <li>
+                <a href="#" aria-label="Next">
+                  <span aria-hidden="true">下一页</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </main>
+        {{> $components/ScFooter/index}}
+      </section>
+    </div>
     {{> $src/scripts}}
   </body>
 </html>

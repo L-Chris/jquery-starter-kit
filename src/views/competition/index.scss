@@ -1,0 +1,15 @@
+@import './children/ListItem/index';
+
+.competition {
+  background-color: #eff2f6;
+  padding-top: 50px;
+  &-main {
+    padding: 0 50px;
+    background-color: white;
+    &-list {
+      .list-item {
+        margin-top: 24px;
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
-  "presets":[["env", {"loose": true}], "es2015"],
+  "presets":[["env", {"loose": true}], "stage-2"],
   "plugins": [
-    "add-module-exports"
+    "add-module-exports",
+    "transform-decorators-legacy"
   ]
 }

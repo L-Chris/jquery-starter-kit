@@ -21,7 +21,6 @@ module.exports = {
   },
   resolve: {
     alias: {
-      jquery: 'jquery/jquery.min.js',
       assets: resolve('src/assets'),
       components: resolve('src/components'),
       views: resolve('src/views'),
