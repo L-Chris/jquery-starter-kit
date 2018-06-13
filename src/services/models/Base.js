@@ -1,7 +1,7 @@
 import axios from '@/services'
 import {BaseURL, ReadOnly} from '@/utils/decorators'
 
-@BaseURL('/n/student')
+@BaseURL(axios.defaults.baseURL)
 class Base {
   static $name = ''
   static $http = axios

@@ -13,7 +13,6 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '',
-    routePublicPath: '',
     proxyTable: {
       '/n/': {
         target: 'http://localhost:8002/n',
@@ -65,7 +64,6 @@ module.exports = {
     assetsSubDirectory: '',
     assetsPublicPath: '../',
     assetsCDNRoot: '',
-    routePublicPath: '',
 
     /**
      * Source Maps

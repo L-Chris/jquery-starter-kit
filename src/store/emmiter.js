@@ -15,3 +15,5 @@ class Emmiter {
     this.emmiter.trigger(event, params)
   }
 }
+
+export default new Emmiter()
