@@ -1,10 +1,9 @@
 'use strict'
 const utils = require('./utils')
 const webpack = require('webpack')
+const autoprefixer = require('autoprefixer')
 const config = require('../config')
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const TransferWebpackPlugin = require('transfer-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -27,6 +26,9 @@ module.exports = {
       src: resolve('src'),
       '@': resolve('src')
     }
+  },
+  postcss: function () {
+    return [autoprefixer]
   },
   module: {
     loaders: [{
@@ -57,10 +59,6 @@ module.exports = {
     }, {
       test: /\.hbs$/,
       loader: 'handlebars-loader'
-    }],
-    postLoaders: [{
-      test: /\.js$/,
-      loader: "es3ify-loader"
     }]
   },
   sassResources: ['./src/styles/vars.scss', './src/styles/mixins.scss'],

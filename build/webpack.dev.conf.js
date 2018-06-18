@@ -7,19 +7,15 @@ const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
 const TransferWebpackPlugin = require('transfer-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const es3ifyPlugin = require('es3ify-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-// add hot-reload related code to entry chunks
-Object.keys(baseWebpackConfig.entry).forEach(function (name) {
-  baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
-})
-
 const webpackConfig = merge(baseWebpackConfig, {
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'source-map',
   module: {
     loaders: [
       {
@@ -35,6 +31,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.DefinePlugin({
       'process.env': config.dev.env
     }),
+    new es3ifyPlugin(),
     new TransferWebpackPlugin([
       {
         from: resolve('static'),
@@ -45,11 +42,24 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new FriendlyErrorsPlugin()
-  ]
+  ],
+  devServer: {
+    disableHostCheck: true,
+    historyApiFallback: {
+      index: '/home/index.html'
+    },
+    progress: true,
+    quiet: true,
+    open: config.dev.autoOpenBrowser,
+    outputPath: config.build.assetsRoot,
+    proxy: config.dev.proxyTable,
+    host: 'localhost',
+    port: config.dev.port
+  }
 })
 
-const entries = utils.findEntry(`${config.base.viewsSubDirectory}/**/index.js`)
-const pages = utils.findEntry(`${config.base.viewsSubDirectory}/**/index.hbs`)
+const entries = utils.findEntry(`${config.base.viewsSubDirectory}/*/index.js`)
+const pages = utils.findEntry(`${config.base.viewsSubDirectory}/*/index.hbs`)
 
 for (let pathName in entries) {
   const conf = {
@@ -61,5 +71,17 @@ for (let pathName in entries) {
   }
   webpackConfig.plugins.push(new HtmlWebpackPlugin(conf))  
 }
+
+const rewrites = Object.entries(pages).reduce((pre, [name]) => {
+  if (!name.includes('home/index')) {
+    pre.push({
+      from: new RegExp(`\/${name.replace(/\/index$/, '')}$`),
+      to: `/${name}.html`
+    })
+  }
+  return pre
+}, [])
+
+webpackConfig.devServer.historyApiFallback.rewrites = rewrites
 
 module.exports = webpackConfig
